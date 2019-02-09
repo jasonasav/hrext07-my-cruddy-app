@@ -8,7 +8,12 @@ interact with localstorage
 $(document).ready(function(){
   // this is where we jquery
   //var keyData = 'ourKey'; // going to need to make this dynamic?
-
+ 
+  var timeStamp = function() {
+      var time = new Date().getTime();
+      var date = new Date(time);
+      return date.toString();
+      }
 
   $('.btn-add').on('click', function(e){
     console.log(e);
@@ -24,7 +29,8 @@ $(document).ready(function(){
     // if you use backticks ` you can use ${templateLiterals}
     // TODO make this vars make sense across the app
     $('.container-data').html('<div class="display-data-item" data-keyValue="'+ keyData +'">'+valueData+'</div>');
-    $('.input-key').val('');
+    //$('.container-data').html('<div class="display-data-item" data-keyValue="'+ keyData +'">'+valueData+'</div>');
+    $('.input-key').val(timeStamp());
     $('.input-value').val('');
   });
 
