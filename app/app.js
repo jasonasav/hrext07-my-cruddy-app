@@ -12,8 +12,9 @@ $(document).ready(function(){
   var timeStamp = function() {
       var time = new Date().getTime();
       var date = new Date(time);
-      return date.toString();
+      return  date.toString();
       }
+
 
   $('.btn-add').on('click', function(e){
     console.log(e);
@@ -28,7 +29,8 @@ $(document).ready(function(){
     // <div class="display-data-item" data-keyValue="keyData">valueData</div>
     // if you use backticks ` you can use ${templateLiterals}
     // TODO make this vars make sense across the app
-    $('.container-data').html('<div class="display-data-item" data-keyValue="'+ keyData +'">'+valueData+'</div>');
+    var stickyNote = '<div class="display-data-item" data-keyValue="'+ keyData +'">'+keyData+valueData+'</div>'
+    $(stickyNote).appendTo('.container-data');
     //$('.container-data').html('<div class="display-data-item" data-keyValue="'+ keyData +'">'+valueData+'</div>');
     $('.input-key').val(timeStamp());
     $('.input-value').val('');
@@ -39,6 +41,7 @@ $(document).ready(function(){
     // need to expand when  more than 1 item is added
 
   // delete item
+  
   $('.container-data').on('click', '.display-data-item', function(e){
     console.log(e.currentTarget.dataset.keyvalue);
     var keyData = e.currentTarget.dataset.keyvalue;
