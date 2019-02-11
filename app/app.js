@@ -15,6 +15,9 @@ $(document).ready(function(){
    };</script>
    http://api.jquery.com/prepend/ */
   
+  // $('.container-data').on('click', '.chkBox', function(e){
+  // $('.chkBox').toggle(parent());
+  // });
 
   var timeStamp = function() {
       var time = new Date().getTime();
@@ -28,24 +31,34 @@ $(document).ready(function(){
  
   
   var createChkBox = function (div) {
-    return $(div).appendTo($('<span class="chkBox">√BX</span>'));
+    return $('<span class="chkBox">√BX  </span>').prependTo($(div));
 
   };
    
+   var createMotivate = function (div) {
+    return $('<span class="Motivate">  Motiƒa†e!: <input type ="text"><smal>(ft)</small></span>').appendTo($(div));
+
+  };
+
+  // var theMotivate = function() {
+  //   $(this).parent().innerHTML +=
+  //   '<span>Label: <input type="text"><small>(ft)</small></span>\r\n';
+  //  }
 
   $('.btn-add').on('click', function(e){
     
-    //toDoCounter++;
+
  
 
     console.log(e);
     var keyData = $('.input-key').val();
     var valueData = $('.input-value').val();
-    //var chkBox = $(<button class="check-box">√BX</button>);
+
         /*write to db*/
     localStorage.setItem(keyData, valueData);
-    //var theToDo = $('<div></div>');
-    var chkBox = $('<div class="chkBox">√BX</div>')
+   
+   // var chkBox = $('<div class="chkBox">√BX</div>')
+    
     //chkBox.text('√BX');
     // read from db
     var displayText = keyData + ' | ' + localStorage.getItem(keyData);
@@ -60,7 +73,11 @@ $(document).ready(function(){
     //$(chkBox).prepend($(stickyNote));
   
     //$(stickyNote).appendTo($(".display-data-item"));
-    $(chkBox).prependTo($(stickyNote));
+    
+    //$(chkBox).prependTo($(stickyNote));
+
+    createChkBox(stickyNote);
+    createMotivate(stickyNote);
     $(stickyNote).appendTo('.container-data');
     //$(chkBox).appendTo($(stickyNote));
     
@@ -72,10 +89,14 @@ $(document).ready(function(){
     //$(".check-box").prependTo($(".display-data-item"))
 
     //$(chkBox).prependTo($(".display-data-item"))
-
+// $(document).on('click', '.chkBox', function(e){
+//   $('.chkBox').toggle(parent());
+//   });
 
   // update db
     // need to expand when  more than 1 item is added
+
+
  
   $('.container-data').on('click', '.chkBox', function(e){
   // // $('.container-data').on('click', '.display-data-item', function(e){
