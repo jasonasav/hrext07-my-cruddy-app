@@ -21,19 +21,32 @@ $(document).ready(function(){
       var date = new Date(time);
       return  date.toString();
       }
-
- var chkBox = $('<span class="chkBox">√BX</span>');
- //$(".check-box").prependTo($(".display-data-item"))
+ 
+  //var chkBox = $('<span class="chkBox">√BX</span>');
+ //var chkBox = $('<div class="chkBox">√BX</div>');
+ 
+ 
   
+  var createChkBox = function (div) {
+    return $(div).appendTo($('<span class="chkBox">√BX</span>'));
+
+  };
+   
+
   $('.btn-add').on('click', function(e){
+    
+    //toDoCounter++;
+ 
+
     console.log(e);
     var keyData = $('.input-key').val();
     var valueData = $('.input-value').val();
     //var chkBox = $(<button class="check-box">√BX</button>);
         /*write to db*/
     localStorage.setItem(keyData, valueData);
-    
-    // chkBox.text('√BX');
+    //var theToDo = $('<div></div>');
+    var chkBox = $('<div class="chkBox">√BX</div>')
+    //chkBox.text('√BX');
     // read from db
     var displayText = keyData + ' | ' + localStorage.getItem(keyData);
     // this only displays the last one? might want to switch to html
@@ -41,13 +54,19 @@ $(document).ready(function(){
     // <div class="display-data-item" data-keyValue="keyData">valueData</div>
     // if you use backticks ` you can use ${templateLiterals}
     // TODO make this vars make sense across the app
-    var stickyNote = $('<div class="display-data-item" data-keyValue="'+ keyData +'">'+keyData+ ' ' +valueData+ ' ' +timeStamp()+'</div>');
+    var stickyNote = $('<div class="display-data-item" data-keyValue="'+ keyData +'">'+keyData+ ' ' +valueData/*+ ' ' +timeStamp()*/+'</div>');
+    //var stickyNote = $('<span class="display-data-item" data-keyValue="'+ keyData +'">'+keyData+ ' ' +valueData/*+ ' ' +timeStamp()*/+'</span>');
     // (not working, adds button every submit) $(".check-box").prependTo($(".display-data-item"))
-    $(chkBox).prependTo($(".display-data-item"))
+    //$(chkBox).prepend($(stickyNote));
+  
+    //$(stickyNote).appendTo($(".display-data-item"));
+    $(chkBox).prependTo($(stickyNote));
     $(stickyNote).appendTo('.container-data');
-    //$(".check-box").prepend($(".display-data-item"))
+    //$(chkBox).appendTo($(stickyNote));
+    
+    
     //$('.container-data').html('<div class="display-data-item" data-keyValue="'+ keyData +'">'+valueData+'</div>');
-    $('.input-key').val(keyData);
+    $('.input-key').val('');
     $('.input-value').val('');
   });
     //$(".check-box").prependTo($(".display-data-item"))
@@ -57,16 +76,9 @@ $(document).ready(function(){
 
   // update db
     // need to expand when  more than 1 item is added
-
-  // delete item
-  // not working
-  // $$('.container-data').on('click', '.chkBox', function(e){
-  //   var keyData = e.currentTarget.dataset.keyvalue;
-  //   (keyData).toggle();
-  // });
-  
+ 
   $('.container-data').on('click', '.chkBox', function(e){
-  // $('.container-data').on('click', '.display-data-item', function(e){
+  // // $('.container-data').on('click', '.display-data-item', function(e){
     console.log(e.currentTarget.dataset.keyvalue);
     var keyData = e.currentTarget.dataset.keyvalue;
     localStorage.removeItem(keyData);
