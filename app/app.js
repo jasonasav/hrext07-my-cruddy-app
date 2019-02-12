@@ -115,10 +115,14 @@ $(document).ready(function(){
  
   $('.container-data').on('click', '.chkBox', function(e){
   // // $('.container-data').on('click', '.display-data-item', function(e){
+    
+    
+
     console.log(e.currentTarget.dataset.keyvalue);
     var keyData = e.currentTarget.dataset.keyvalue;
-    localStorage.removeItem(keyData);
-    $('.container-data').text('');
+    //localStorage.removeItem(keyData);
+    e.currentTarget.parentNode.remove( e.currentTarget.parentNode);
+    //$('.container-data').text('');
   });
   // delete all?
   $('.btn-clear').click(function(){
