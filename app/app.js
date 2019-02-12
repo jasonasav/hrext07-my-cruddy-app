@@ -19,11 +19,21 @@ $(document).ready(function(){
 //   $('.display-data-item').prepend('.container-data');
 // };
 
+  
+  var kolor = function randomColor(){
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+  };
+
   var timeStamp = function() {
       var time = new Date().getTime();
       var date = new Date(time);
       return  date.toString();
-      }
+  };
  
   
   var createChkBox = function (div) {
@@ -64,8 +74,10 @@ $(document).ready(function(){
 
   $('.container-data').on('click', '.Motivate', function(e){
     var motivateMessage = $('.jason').val()
+    //motivateMessage.css({"background-color": kolor});
+
     console.log(e);
-    $('<span>'+motivateMessage+'</span>').appendTo(e.currentTarget.parentNode);
+    $('<span style="color:'+kolor()+'">'+motivateMessage+'</span>').appendTo(e.currentTarget.parentNode);
     $('.jason').val('');
   });
 
