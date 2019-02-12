@@ -5,7 +5,108 @@ interact with localstorage
 
  */
 
+ver 1.3 
 
+$(document).ready(function(){
+ 
+  var timeStamp = function() {
+      var time = new Date().getTime();
+      var date = new Date(time);
+      return  date.toString();
+      }
+  
+  var createChkBox = function (div) {
+    return $('<span class="chkBox">√BX  </span>').prependTo($(div));
+
+  };
+   
+   var createMotivate = function (div) {
+    return $('<span class="Motivate">  Motiƒa†e!: <input type ="text"><smal>(ft)</small></span>').appendTo($(div));
+
+  };
+
+  $('.btn-add').on('click', function(e){
+    console.log(e);
+    var keyData = $('.input-key').val();
+    var valueData = $('.input-value').val();
+    localStorage.setItem(keyData, valueData);
+    var displayText = keyData + ' | ' + localStorage.getItem(keyData);
+    var stickyNote = $('<div class="display-data-item" data-keyValue="'+ keyData +'">'+keyData+ ' ' +valueData/*+ ' ' +timeStamp()*/+'</div>');
+    createChkBox(stickyNote);
+    createMotivate(stickyNote);
+    $(stickyNote).appendTo('.container-data'); 
+    $('.input-key').val('');
+    $('.input-value').val('');
+  });
+   
+  $('.container-data').on('click', '.chkBox', function(e){
+  
+    console.log(e.currentTarget.dataset.keyvalue);
+    var keyData = e.currentTarget.dataset.keyvalue;
+    localStorage.removeItem(keyData);
+    $('.container-data').text('');
+  });
+
+ 
+  $('.container-data').on('click', '.Motivate', function(e){
+    console.log(e.currentTarget.dataset.keyvalue);
+    var keyData = e.currentTarget.dataset.keyvalue;
+    localStorage.removeItem(keyData);
+    $('.container-data').text('');
+  });
+   $('.btn-clear').click(function(){
+    localStorage.clear();
+    $('.container-data').text('');
+  });
+
+});
+
+//---------------------------------------
+
+ver 1.2 
+
+Puts √BX above message div. 
+
+$(document).ready(function(){
+  var timeStamp = function() {
+      var time = new Date().getTime();
+      var date = new Date(time);
+      return  date.toString();
+      }
+ 
+  var chkBox = $('<span class="chkBox">√BX</span>');  
+  var createChkBox = function (div) {
+    return $(div).appendTo($('<span class="chkBox">√BX</span>'));
+  };
+  $('.btn-add').on('click', function(e){
+    console.log(e);
+    var keyData = $('.input-key').val();
+    var valueData = $('.input-value').val();
+    localStorage.setItem(keyData, valueData);
+    var chkBox = $('<div class="chkBox">√BX</div>')
+    var displayText = keyData + ' | ' + localStorage.getItem(keyData);
+    var stickyNote = $('<div class="display-data-item" data-keyValue="'+ keyData +'">'+keyData+ ' ' +valueData/*+ ' ' +timeStamp()*/+'</div>');
+    $(chkBox).prependTo($(stickyNote));
+    $(stickyNote).appendTo('.container-data');
+    $('.input-key').val('');
+    $('.input-value').val('');
+  });
+ 
+  $('.container-data').on('click', '.chkBox', function(e){
+    console.log(e.currentTarget.dataset.keyvalue);
+    var keyData = e.currentTarget.dataset.keyvalue;
+    localStorage.removeItem(keyData);
+    $('.container-data').text('');
+  });
+
+  $('.btn-clear').click(function(){
+    localStorage.clear();
+    $('.container-data').text('');
+  });
+
+});
+
+// -----------------------------------------------
 
 Init app
 interact with DOM

@@ -10,24 +10,20 @@ $(document).ready(function(){
   //var keyData = 'ourKey'; // going to need to make this dynamic?
 
   // maybe load all of our old todo lists when the page loads
-  /* <script>window.onload = function() {
+  //  <script>window.onload = function() {
   // $( "p" ).prepend( $( "b" ) );
-   };</script>
-   http://api.jquery.com/prepend/ */
+  //  };</script>
+   //http://api.jquery.com/prepend/ 
   
-  // $('.container-data').on('click', '.chkBox', function(e){
-  // $('.chkBox').toggle(parent());
-  // });
+//   window.onload = function() {
+//   $('.display-data-item').prepend('.container-data');
+// };
 
   var timeStamp = function() {
       var time = new Date().getTime();
       var date = new Date(time);
       return  date.toString();
       }
- 
-  //var chkBox = $('<span class="chkBox">√BX</span>');
- //var chkBox = $('<div class="chkBox">√BX</div>');
- 
  
   
   var createChkBox = function (div) {
@@ -36,20 +32,14 @@ $(document).ready(function(){
   };
    
    var createMotivate = function (div) {
-    return $('<span class="Motivate">  Motiƒa†e!: <input type ="text"><smal>(ft)</small></span>').appendTo($(div));
+    return $('<span class="Motivate">  Motiƒa†e!: <input type ="text" class="jason"><smal>(ft)</small></span>').appendTo($(div));
 
   };
+  
 
-  // var theMotivate = function() {
-  //   $(this).parent().innerHTML +=
-  //   '<span>Label: <input type="text"><small>(ft)</small></span>\r\n';
-  //  }
+
 
   $('.btn-add').on('click', function(e){
-    
-
- 
-
     console.log(e);
     var keyData = $('.input-key').val();
     var valueData = $('.input-value').val();
@@ -67,6 +57,8 @@ $(document).ready(function(){
     // <div class="display-data-item" data-keyValue="keyData">valueData</div>
     // if you use backticks ` you can use ${templateLiterals}
     // TODO make this vars make sense across the app
+
+    //$('.container-data').html('<div class="display-data-item" data-keyValue="'+ keyData +'">'+valueData+'</div>');
     var stickyNote = $('<div class="display-data-item" data-keyValue="'+ keyData +'">'+keyData+ ' ' +valueData/*+ ' ' +timeStamp()*/+'</div>');
     //var stickyNote = $('<span class="display-data-item" data-keyValue="'+ keyData +'">'+keyData+ ' ' +valueData/*+ ' ' +timeStamp()*/+'</span>');
     // (not working, adds button every submit) $(".check-box").prependTo($(".display-data-item"))
@@ -95,8 +87,31 @@ $(document).ready(function(){
 
   // update db
     // need to expand when  more than 1 item is added
+  
+  // $('.container-data').on('click', '.Motivate', function(event){
+  //     console.log(event);
+  //   });
+   //var mtv = $(this).next('.Motivate');
 
+//   EXAMPLE $(function(){
+//  $(document).on('click','.user',function(){
+//      alert($(this).text());
+// });
+// });
+  $('.container-data').on('click', '.Motivate', function(e){
+    var motivateMessage = $('.jason').val()
+    console.log(e);
+    //var now = e.currentTarget.parentNode
+    //var keyData = e.currentTarget.dataset.keyvalue;
+    $('<span>'+motivateMessage+'</span>').appendTo(e.currentTarget.parentNode);
+    //$('.jason').val('');
 
+  });
+//example 
+// $(".list-item").each(function () {    //loop over each list item
+//     myYear= $(".year", this);         //get the year of the current list item
+//     $(".item-information", this).append(myYear); //append it to the item information
+// });
  
   $('.container-data').on('click', '.chkBox', function(e){
   // // $('.container-data').on('click', '.display-data-item', function(e){
