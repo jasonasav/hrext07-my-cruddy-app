@@ -46,8 +46,23 @@ $(document).ready(function(){
     '/*Motiƒa†e!: <input type ="text" class="jason"><smal>(ft)</small>*/'
 
   };
-  
 
+    var loadFunc = function() {
+
+    for( var i = 0; i < localStorage.length; i++) {
+      var loadKeyData = localStorage.key(i);
+      var loadValueData = localStorage.getItem(localStorage.key(i));
+      var loadStickyNote = $('<div class="display-data-item" data-keyValue="'+ loadKeyData +'">'+loadKeyData+ ' ' +loadValueData+'</div>');
+      createChkBox(loadStickyNote);
+      createMotivate(loadStickyNote);
+      $(loadStickyNote).appendTo('.container-data');
+
+    }
+  // $( ".display-data-item" ).prependTo( $( ".container-data" ) );
+  // console.log(e);
+   };
+  
+ window.onload = loadFunc();
 
 
   $('.btn-add').on('click', function(e){
@@ -64,7 +79,7 @@ $(document).ready(function(){
     // <div class="display-data-item" data-keyValue="keyData">valueData</div>
     // if you use backticks ` you can use ${templateLiterals}
     // TODO make this vars make sense across the app
-    var stickyNote = $('<div class="display-data-item" data-keyValue="'+ keyData +'">'+keyData+ ' ' +valueData/*+ ' ' +timeStamp()*/+'</div>');
+    var stickyNote = $('<div class="display-data-item" data-keyValue="'+ keyData +'">'+keyData+ ' ' +valueData+'</div>');
     createChkBox(stickyNote);
     createMotivate(stickyNote);
     $(stickyNote).appendTo('.container-data');
