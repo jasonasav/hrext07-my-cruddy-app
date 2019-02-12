@@ -4,6 +4,65 @@ interact with DOM
 interact with localstorage
 
  */
+ ver 1.4 
+
+ Can add motivate message, only from top todo list item motivate message value, but can add on 
+ click of each motivate button to specific todo list. 
+ √BX button deletes specific todo list item. 
+
+ $(document).ready(function(){
+
+  var timeStamp = function() {
+      var time = new Date().getTime();
+      var date = new Date(time);
+      return  date.toString();
+      }
+  var createChkBox = function (div) {
+    return $('<span class="chkBox">√BX  </span>').prependTo($(div));
+
+  };
+   
+   var createMotivate = function (div) {
+    return $('<span class="Motivate">  Motiƒa†e!: <input type ="text" class="jason"><smal>(ft)</small></span>').appendTo($(div));
+
+  };
+
+
+  $('.btn-add').on('click', function(e){
+    console.log(e);
+    var keyData = $('.input-key').val();
+    var valueData = $('.input-value').val();
+    localStorage.setItem(keyData, valueData);
+    var displayText = keyData + ' | ' + localStorage.getItem(keyData);
+    var stickyNote = $('<div class="display-data-item" data-keyValue="'+ keyData +'">'+keyData+ ' ' +valueData/*+ ' ' +timeStamp()*/+'</div>');
+    createChkBox(stickyNote);
+    createMotivate(stickyNote);
+    $(stickyNote).appendTo('.container-data');
+    $('.input-key').val('');
+    $('.input-value').val('');
+   });
+
+  $('.container-data').on('click', '.Motivate', function(e){
+    var motivateMessage = $('.jason').val()
+    console.log(e);
+    $('<span>'+motivateMessage+'</span>').appendTo(e.currentTarget.parentNode);
+  });
+
+ 
+  $('.container-data').on('click', '.chkBox', function(e){
+    console.log(e.currentTarget.dataset.keyvalue);
+    var keyData = e.currentTarget.dataset.keyvalue;
+
+    e.currentTarget.parentNode.remove( e.currentTarget.parentNode);
+
+  });
+
+  $('.btn-clear').click(function(){
+    localStorage.clear();
+    $('.container-data').text('');
+  });
+
+});
 
 ver 1.3 
 
